@@ -1,9 +1,7 @@
 <template>
-  <div>test123Login</div>
+  <div>test</div>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style></style>
