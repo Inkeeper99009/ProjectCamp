@@ -6,6 +6,18 @@ import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
 
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+/* import specific icons */
+import { } from '@fortawesome/free-solid-svg-icons'
+
+/* add icons to the library */
+library.add()
+
 const app = createApp(App)
 
 const options = {
@@ -26,4 +38,4 @@ const options = {
 app.use(Toast, options);
 app.use(router)
 
-app.mount('#app')
+app.component('font-awesome-icon', FontAwesomeIcon).mount('#app')
