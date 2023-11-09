@@ -13,15 +13,17 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { } from '@fortawesome/free-solid-svg-icons'
+import {  } from '@fortawesome/free-solid-svg-icons'
+import { faCompass } from '@fortawesome/free-regular-svg-icons';
 
 /* add icons to the library */
-library.add()
+library.add(faCompass)
 
 const app = createApp(App)
 
 const options = {
     // You can set your default options here for Toastification
+    transition: "Vue-Toastification__fade",
     position: "top-right",
     timeout: 5000,
     closeOnClick: false,
@@ -37,5 +39,5 @@ const options = {
 
 app.use(Toast, options);
 app.use(router)
-
-app.component('font-awesome-icon', FontAwesomeIcon).mount('#app')
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.mount('#app')

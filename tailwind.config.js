@@ -6,7 +6,7 @@ module.exports = {
       colors:{
         'background':'#202020',
         'container':'#2d2d2d',
-        'accent':'#60cdff',
+        'accent':'#2196f3',
         'sec':'#373737',
         'text':'#ecf0f1'
       },
