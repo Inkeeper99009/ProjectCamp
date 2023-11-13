@@ -19,6 +19,25 @@ import { faCompass } from '@fortawesome/free-regular-svg-icons';
 /* add icons to the library */
 library.add(faCompass)
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDaxz528yP4scrj3psKTFyE3c0DupMnjIA",
+  authDomain: "compass-bef8b.firebaseapp.com",
+  projectId: "compass-bef8b",
+  storageBucket: "compass-bef8b.appspot.com",
+  messagingSenderId: "1057761439906",
+  appId: "1:1057761439906:web:5cc6c5dec3bb6e2f71a7fb"
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
+
 const app = createApp(App)
 
 const options = {
