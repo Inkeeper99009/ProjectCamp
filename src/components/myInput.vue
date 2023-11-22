@@ -1,13 +1,16 @@
 <template>
   <div
     id="inputContainer"
-    class="px-2 border-y-0 border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
+    class="px-2 border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
   >
     <input
       :type="type"
       :placeholder="placeholder"
       @input="$emit('update:modelValue', $event.target.value)"
-      class="flex placeholder:text-text/40 outline-none indent-2 px-2 p-1 rounded-md bg-sec"
+      class="flex placeholder:text-text/40 outline-none indent-2 px-2 p-1 w-full rounded-md bg-sec"
+      :name="name"
+      :autocomplete="'off'"
+      :v-model="test"
     />
   </div>
 </template>
@@ -16,6 +19,18 @@
 const props = defineProps({
   placeholder: String,
   type: String,
+  name: String,
+  test:String
 });
 defineEmits(["update:modelValue"]);
 </script>
+<style>
+input[type="date"] {
+  text-indent: 3px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  color: #ecf0f1 !important;
+  filter: invert();
+}
+</style>

@@ -1,25 +1,16 @@
 <template>
-  <div>{{currentUser}}</div>
-  <div v-if="currentUser==='admin@compass.com'">adminOnly</div>
+  <div
+    id="page"
+    class="flex flex-col h-screen min-w-max text-text bg-background no-scrollbar"
+  >
+    <topBar class="animate-Smooth_Appear" />
+    <div id="content" class="flex h-full animate-Smooth_Appear overflow-y-scroll no-scrollbar">
+      <myTable />
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { ref } from "vue";
-
-const auth = getAuth();
-const currentUser=ref('')
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/auth.user
-    currentUser.value = user.email;
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+import topBar from "../components/topBar.vue";
+import myTable from "../components/myTable.vue";
 </script>
-
-<style></style>

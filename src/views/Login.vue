@@ -17,6 +17,7 @@
         :type="'text'"
         v-model="email"
         @keydown.enter="login"
+        :name="'email'"
       />
       <myInput
         :placeholder="'Password'"
@@ -92,7 +93,7 @@ const login = () => {
 };
 </script>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Carter+One&family=Kaushan+Script&display=swap");
 #title {
   /* font-family: 'Carter One', cursive; */
