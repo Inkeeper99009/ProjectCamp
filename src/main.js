@@ -13,11 +13,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faDoorOpen, faGear, faXmark, faPeopleRoof, faCalendarDays, faCaravan, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons'
+import { faDoorOpen, faGear, faXmark, faPeopleRoof, faCalendarDays, faCaravan, faHandHoldingDollar,faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import { faCompass, faUser, faTrashCan, } from '@fortawesome/free-regular-svg-icons';
 
 /* add icons to the library */
-library.add(faCompass, faDoorOpen, faUser, faTrashCan, faGear, faXmark, faPeopleRoof, faCalendarDays, faCaravan, faHandHoldingDollar)
+library.add(faCompass, faDoorOpen, faUser, faTrashCan, faGear, faXmark, faPeopleRoof, faCalendarDays, faCaravan, faHandHoldingDollar,faTriangleExclamation)
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";

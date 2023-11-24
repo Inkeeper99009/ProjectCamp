@@ -3,6 +3,7 @@
     id="inputContainer"
     class="px-2 border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
   >
+  <span class=" text-xs">{{inputTitle}}</span>
     <input
       :type="type"
       :placeholder="placeholder"
@@ -20,7 +21,8 @@ const props = defineProps({
   placeholder: String,
   type: String,
   name: String,
-  test:String
+  test:String,
+  inputTitle:String
 });
 defineEmits(["update:modelValue"]);
 </script>

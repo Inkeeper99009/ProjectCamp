@@ -75,20 +75,26 @@ import topBarButton from "./topBarButton.vue";
 import { getAuth, signOut } from "firebase/auth";
 import router from "../router";
 
+const emits = defineEmits(["selectedTab"]);
+
 const activeBtn = ref(1);
 const selectBtn = (num) => {
   switch (num) {
     case 1:
       activeBtn.value = 1;
+      emits("selectedTab", num);
       break;
     case 2:
       activeBtn.value = 2;
+      emits("selectedTab", num);
       break;
     case 3:
       activeBtn.value = 3;
+      emits("selectedTab", num);
       break;
     case 4:
       activeBtn.value = 4;
+      emits("selectedTab", num);
       break;
   }
 };

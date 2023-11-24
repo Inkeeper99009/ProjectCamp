@@ -1,6 +1,6 @@
 <template>
   <div id="container" class="flex flex-col w-full h-full p-4 pt-0">
-    <oneTableRow v-for="item,index in list" :key="item" :object="item" :itemId="index" />
+    <guestRow v-for="item,index in list" :key="item" :object="item" :itemId="index" />
   </div>
   <div
     id="createWindow"
@@ -9,7 +9,7 @@
   >
     <div
       id="createWindowContent"
-      class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[30rem] bg-container shadow-standart rounded-lg"
+      class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[35rem] bg-container shadow-standart rounded-lg"
     >
       <span
         id="containerTitleAndCloseBtn"
@@ -22,7 +22,7 @@
       /></span>
       <div
         id="createInputs"
-        class="flex flex-col gap-4 justify-between items-center w-full"
+        class="flex flex-col mt-10 gap-4 justify-between items-center w-full"
       >
         <myInput :type="'text'" :placeholder="'Nachname'" v-model="Nachname" />
         <myInput :type="'text'" :placeholder="'Vorname'" v-model="Vorname" />
@@ -54,9 +54,9 @@
 </template>
 
 <script setup>
-import oneTableRow from "./oneTableRow.vue";
-import myButton from "./myButton.vue";
-import myInput from "./myInput.vue";
+import guestRow from "../TableRows/guestRow.vue";
+import myButton from "../myButton.vue";
+import myInput from "../myInput.vue";
 import { onMounted, ref } from "vue";
 import { getDatabase, ref as dbRef, onValue, set } from "firebase/database";
 
