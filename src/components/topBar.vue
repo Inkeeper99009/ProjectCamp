@@ -1,9 +1,9 @@
 <template>
-  <div
-    id="container"
-    class="flex w-full p-4 min-w-fit items-center justify-between"
-  >
-    <div id="title" class="flex mr-16 text-3xl min-w-fit cursor-default">
+  <div id="container" class="flex w-full p-4 items-center justify-between">
+    <div
+      id="title"
+      class="hidden lg:flex mr-16 justify-center items-center text-3xl min-w-fit cursor-default"
+    >
       <font-awesome-icon
         id="icon"
         class="mr-2"
@@ -13,41 +13,49 @@
     <div class="flex justify-center items-center">
       <div id="btnsContainer" class="flex gap-4">
         <topBarButton
+          :iconName="'fa-solid fa-people-roof'"
           :text="'Urlaubsgäste'"
           @click="selectBtn(1)"
           :class="{
             ['opacity-100 border-x-text']: activeBtn === 1,
-            ['opacity-40 hover:opacity-90 border-x-transparent']: activeBtn != 1,
+            ['opacity-40 hover:opacity-90 border-x-transparent']:
+              activeBtn != 1,
           }"
         />
         <topBarButton
+          :iconName="'fa-solid fa-calendar-days'"
           :text="'Urlaubsbuchungen'"
           @click="selectBtn(2)"
           :class="{
             ['opacity-100 border-x-text']: activeBtn === 2,
-            ['opacity-40 hover:opacity-90 border-x-transparent']: activeBtn != 2,
+            ['opacity-40 hover:opacity-90 border-x-transparent']:
+              activeBtn != 2,
           }"
         />
         <topBarButton
+          :iconName="'fa-solid fa-caravan'"
           :text="'Stellplätze'"
           @click="selectBtn(3)"
           :class="{
             ['opacity-100 border-x-text']: activeBtn === 3,
-            ['opacity-40 hover:opacity-90 border-x-transparent']: activeBtn != 3,
+            ['opacity-40 hover:opacity-90 border-x-transparent']:
+              activeBtn != 3,
           }"
         />
         <topBarButton
+          :iconName="'fa-solid fa-hand-holding-dollar'"
           :text="'Zusatzkosten'"
           @click="selectBtn(4)"
           :class="{
             ['opacity-100 border-x-text']: activeBtn === 4,
-            ['opacity-40 hover:opacity-90 border-x-transparent']: activeBtn != 4,
+            ['opacity-40 hover:opacity-90 border-x-transparent']:
+              activeBtn != 4,
           }"
         />
       </div>
     </div>
     <div
-    @click="signOutFunc"
+      @click="signOutFunc"
       id="btnContainer"
       class="px-2 ml-8 border-y-0 border-red-400 cursor-pointer border-x border-x-transparent hover:border-x hover:border-x-red-400 transition-all"
     >
@@ -87,12 +95,14 @@ const selectBtn = (num) => {
 
 const auth = getAuth();
 const signOutFunc = () => {
-signOut(auth).then(() => {
-  // Sign-out successful.
-  router.push('/')
-}).catch((error) => {
-  // An error happened.
-});
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      router.push("/");
+    })
+    .catch((error) => {
+      // An error happened.
+    });
 };
 </script>
 

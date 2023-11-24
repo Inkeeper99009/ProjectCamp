@@ -1,25 +1,25 @@
 <template>
   <div
     id="container"
-    class="flex w-full items-center gap-8 border-y-sec border-y p-4 hover:bg-sec transition-all cursor-pointer"
+    class="flex w-max items-center gap-8 border-y-sec border-y p-4 hover:bg-sec transition-all cursor-pointer"
   >
     <!-- {{ itemId }} -->
     <div class="flex gap-8 items-center w-full">
       <font-awesome-icon icon="fa-regular fa-user" class="text-xl" />
-      <span class="max-w-[15rem] min-w-[10rem] truncate">{{
+      <span class="max-w-[10rem] min-w-[10rem] truncate">{{
         object.LastName
       }}</span>
-      <span class="max-w-[15rem] min-w-[10rem] truncate">{{
+      <span class="max-w-[10rem] min-w-[10rem] truncate">{{
         object.FirstName
       }}</span>
       <span class="max-w-[10rem] min-w-[10rem] truncate">{{
         object.BDay
       }}</span>
       <span class="max-w-[10rem] min-w-[10rem] truncate">{{ object.Tel }}</span>
-      <span class="max-w-[15rem] min-w-[10rem] truncate">{{
+      <span class="max-w-[10rem] min-w-[10rem] truncate">{{
         object.Email
       }}</span>
-      <span class="max-w-[25rem] min-w-[10rem] truncate">{{
+      <span class="max-w-[15rem] min-w-[15rem] truncate">{{
         object.Adress
       }}</span>
     </div>

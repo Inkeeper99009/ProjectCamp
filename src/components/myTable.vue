@@ -39,7 +39,7 @@
   </div>
   <div
     id="bottomMenu"
-    class="flex self-center justify-center items-center px-16 w-full h-14 absolute bottom-0 z-10 shadow-standart opacity-0 animate-Smooth_Appear"
+    class="flex self-center justify-center items-center px-16 w-full h-14 absolute bottom-0 z-10 opacity-0 animate-Smooth_Appear"
   >
     <div
       class="flex justify-center items-center rounded-t-[30px] w-full h-full bg-container"
