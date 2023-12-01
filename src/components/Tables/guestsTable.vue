@@ -13,7 +13,7 @@
     >
       <span
         id="containerTitleAndCloseBtn"
-        class="flex justify-between items-center absolute top-7 text-xl left-8 w-[21rem] self-start"
+        class="flex justify-between items-center absolute top-7 text-xl left-7 w-[21.5rem] self-start"
         >Neuen Kunden Anlegen
         <font-awesome-icon
           @click="createWindowHandler"
@@ -24,12 +24,12 @@
         id="createInputs"
         class="flex flex-col mt-10 gap-4 justify-between items-center w-full"
       >
-        <myInput :type="'text'" :placeholder="'Nachname'" v-model="Nachname" />
-        <myInput :type="'text'" :placeholder="'Vorname'" v-model="Vorname" />
-        <myInput :type="'date'" :placeholder="'Geb. Datum'" v-model="BDay" />
-        <myInput :type="'text'" :placeholder="'Tel.'" v-model="Tel" />
-        <myInput :type="'text'" :placeholder="'E-mail'" v-model="Email" />
-        <myInput :type="'text'" :placeholder="'Anschrift'" v-model="Adress" />
+        <myInput :type="'text'" :placeholder="'Nachname'" inputTitle="Nachname" v-model="Nachname" />
+        <myInput :type="'text'" :placeholder="'Vorname'" inputTitle="Vorname" v-model="Vorname" />
+        <myInput :type="'date'" :placeholder="'Geb. Datum'" inputTitle="Geb. Datum" v-model="BDay" />
+        <myInput :type="'text'" :placeholder="'Tel.'" inputTitle="Tel." v-model="Tel" />
+        <myInput :type="'text'" :placeholder="'E-mail'" inputTitle="E-mail" v-model="Email" />
+        <myInput :type="'text'" :placeholder="'Anschrift'" inputTitle="Anschrift" v-model="Adress" />
         <myButton
           :text="'Anlegen'"
           @click="writeGuestData(Nachname, Vorname, BDay, Tel, Email, Adress)"

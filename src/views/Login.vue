@@ -11,19 +11,20 @@
       />
       <div id="title" class="text-[8rem]">ComPass</div>
     </div>
-    <div id="inputContainer" class="flex flex-col gap-4">
+    <div
+      @keypress.enter="login"
+      id="inputContainer"
+      class="flex flex-col gap-4"
+    >
       <myInput
-        :placeholder="'E-mail'"
+        :placeholder="'Benutzername'"
         :type="'text'"
-        v-model="email"
-        @keydown.enter="login"
-        :name="'email'"
+        v-model="username"
       />
       <myInput
         :placeholder="'Password'"
         :type="'password'"
         v-model="password"
-        @keydown.enter="login"
       />
       <myButton :text="'Login'" @click="login" />
     </div>
@@ -35,61 +36,39 @@ import myButton from "../components/myButton.vue";
 import myInput from "../components/myInput.vue";
 import { useToast } from "vue-toastification";
 import { ref } from "vue";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getDatabase, ref as dbRef, onValue, set } from "firebase/database";
+
 import router from "../router";
 
 const toast = useToast();
 
-const email = ref("");
+const username = ref("");
 const password = ref("");
-const loginFunc = () => {
-  toast.error("You have entered an invalid username or password");
-};
+const user = ref();
 
-const register = () => {
-  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((data) => {
-      toast.success("The account has been successfully created !", {});
-      router.push("/home");
-    })
-    .catch((e) => {
-      if (e.code === "auth/email-already-in-use")
-        toast.error("This E-mail is already in use by another account !", {});
-      if (e.code === "auth/invalid-email") {
-        toast.error("This E-mail is invalid !", {});
-      }
-      if (e.code === "auth/weak-password")
-        toast.error("The Password must be longer than 5 characters !", {});
-    });
-};
+const register = () => {};
 const login = () => {
-  signInWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((data) => {
-      router.push("/home");
-    })
-    .catch((e) => {
-      if (e.code === "auth/invalid-email") {
-        toast.error("Invalid E-mail !", {});
+  const db = getDatabase();
+  let dbResult = dbRef(db, "users/" + username.value);
+  onValue(dbResult, (snapshot) => {
+    user.value = snapshot.val();
+    if (user.value === null) {
+      toast.error("Die eingegebenen Daten sind falsch!");
+      return;
+    } else {
+      if (username.value === "" || password.value === "") {
+        toast.info("Alle Felder müssen ausgefüllt werden!");
+        return;
       }
-      if (e.code === "auth/user-disabled") {
-        toast.error("This account has been deactivated !", {});
+      if (password.value != user.value.password) {
+        toast.error("Die eingegebenen Daten sind falsch!");
       }
-      if (e.code === "auth/user-not-found")
-        toast.error("You have entered an incorrect E-mail or Password !", {});
-      if (e.code === "auth/wrong-password")
-        toast.error("You have entered an incorrect E-mail or Password !", {});
-      if (e.code === "auth/invalid-login-credentials")
-        toast.error("You have entered an incorrect E-mail or Password !", {});
-      if (e.code === "auth/too-many-requests")
-        toast.error(
-          "You have tried to log in too many times. Try again in a little while !",
-          {}
-        );
-    });
+      if (user.value.password === password.value) {
+        localStorage.setItem("storedData", username.value);
+        router.push('/home')
+      }
+    }
+  });
 };
 </script>
 

@@ -6,22 +6,42 @@
     <!-- {{ itemId }} -->
     <div class="flex gap-8 items-center w-full">
       <font-awesome-icon icon="fa-regular fa-user" class="text-xl" />
-      <span class="max-w-[10rem] min-w-[10rem] truncate">{{
-        object.LastName
-      }}</span>
-      <span class="max-w-[10rem] min-w-[10rem] truncate">{{
-        object.FirstName
-      }}</span>
-      <span class="max-w-[10rem] min-w-[10rem] truncate">{{
-        object.BDay
-      }}</span>
-      <span class="max-w-[10rem] min-w-[10rem] truncate">{{ object.Tel }}</span>
-      <span class="max-w-[10rem] min-w-[10rem] truncate">{{
-        object.Email
-      }}</span>
-      <span class="max-w-[15rem] min-w-[15rem] truncate">{{
-        object.Adress
-      }}</span>
+      <div class="flex flex-col">
+        <span class="text-xs">Nachname</span>
+        <span class="max-w-[10rem] min-w-[10rem] truncate">{{
+          object.LastName
+        }}</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs">Vorname</span>
+        <span class="max-w-[10rem] min-w-[10rem] truncate">{{
+          object.FirstName
+        }}</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs">Geb. Datum</span>
+        <span class="max-w-[10rem] min-w-[10rem] truncate">{{
+          object.BDay
+        }}</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs">Tel.</span>
+        <span class="max-w-[10rem] min-w-[10rem] truncate">{{
+          object.Tel
+        }}</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs">E-mail</span>
+        <span class="max-w-[10rem] min-w-[10rem] truncate">{{
+          object.Email
+        }}</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs">Anschrift</span>
+        <span class="max-w-[15rem] min-w-[15rem] truncate">{{
+          object.Adress
+        }}</span>
+      </div>
     </div>
     <font-awesome-icon
       icon="fa-solid fa-gear"
@@ -43,24 +63,27 @@
       id="deleteWindowContent"
       class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[30rem] bg-container shadow-standart rounded-lg"
     >
-    <font-awesome-icon icon="fa-solid fa-triangle-exclamation" class="text-red-400 mb-4 text-2xl" />
-      <span class="flex justify-center items-center text-3xl text-center  w-full mb-4 text-red-400"
+      <font-awesome-icon
+        icon="fa-solid fa-triangle-exclamation"
+        class="text-red-400 mb-4 text-2xl"
+      />
+      <span
+        class="flex justify-center items-center text-3xl text-center w-full mb-4 text-red-400"
         >Möchten Sie diese Datei wirklich löschen?</span
       >
-      <div id="btnContainer" class="flex w-full justify-center gap-16 mt-8 items-center">
+      <div
+        id="btnContainer"
+        class="flex w-full justify-center gap-16 mt-8 items-center"
+      >
         <div
-        @click="deleteSelectedData"
+          @click="deleteSelectedData"
           id="leftBtnContainer"
           class="px-2 border-y-0 opacity-75 border-red-400 cursor-pointer border-x border-x-transparent text-text/30 hover:border-x hover:text-red-400 hover:border-x-red-400 transition-all"
         >
-          <div
-            class="flex gap-2 justify-center  items-center text-2xl"
-          >
-            Ja
-          </div>
+          <div class="flex gap-2 justify-center items-center text-2xl">Ja</div>
         </div>
         <div
-        @click="deleteWindowHandler"
+          @click="deleteWindowHandler"
           id="rightBtnContainer"
           class="px-2 border-y-0 border-text cursor-pointer border-x border-x-transparent hover:border-x hover:border-text transition-all"
         >
@@ -99,7 +122,8 @@
         <div
           id="inputContainer"
           class="px-2 border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
-        > <span class=" text-xs">Nachname</span>
+        >
+          <span class="text-xs">Nachname</span>
           <input
             type="text"
             class="flex placeholder:text-text/40 outline-none indent-2 px-2 p-1 w-full rounded-md bg-sec"
@@ -110,7 +134,7 @@
           id="inputContainer"
           class="px-2 border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
         >
-        <span class=" text-xs">Vorname</span>
+          <span class="text-xs">Vorname</span>
           <input
             type="text"
             class="flex placeholder:text-text/40 outline-none indent-2 px-2 p-1 w-full rounded-md bg-sec"
@@ -121,7 +145,7 @@
           id="inputContainer"
           class="px-2 border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
         >
-        <span class=" text-xs">Geb. Datum</span>
+          <span class="text-xs">Geb. Datum</span>
           <input
             type="date"
             class="flex placeholder:text-text/40 outline-none indent-2 px-2 p-1 w-full rounded-md bg-sec"
@@ -132,7 +156,7 @@
           id="inputContainer"
           class="px-2 border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
         >
-        <span class=" text-xs">Tel.</span>
+          <span class="text-xs">Tel.</span>
           <input
             type="text"
             class="flex placeholder:text-text/40 outline-none indent-2 px-2 p-1 w-full rounded-md bg-sec"
@@ -143,7 +167,7 @@
           id="inputContainer"
           class="px-2 border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
         >
-        <span class=" text-xs">E-mail</span>
+          <span class="text-xs">E-mail</span>
 
           <input
             type="text"
@@ -155,7 +179,7 @@
           id="inputContainer"
           class="px-2 border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
         >
-        <span class=" text-xs">Anschrift</span>
+          <span class="text-xs">Anschrift</span>
           <input
             type="text"
             class="flex placeholder:text-text/40 outline-none indent-2 px-2 p-1 w-full rounded-md bg-sec"

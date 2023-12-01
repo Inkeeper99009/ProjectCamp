@@ -10,7 +10,7 @@
         icon="fa-regular fa-compass"
       />ComPass
     </div>
-    <div class="flex justify-center items-center">
+    <div v-if="!isAdmin" class="flex justify-center items-center">
       <div id="btnsContainer" class="flex gap-4">
         <topBarButton
           :iconName="'fa-solid fa-people-roof'"
@@ -72,10 +72,12 @@
 <script setup>
 import { ref } from "vue";
 import topBarButton from "./topBarButton.vue";
-import { getAuth, signOut } from "firebase/auth";
 import router from "../router";
 
 const emits = defineEmits(["selectedTab"]);
+const props = defineProps({
+  isAdmin: Boolean,
+});
 
 const activeBtn = ref(1);
 const selectBtn = (num) => {
@@ -99,16 +101,10 @@ const selectBtn = (num) => {
   }
 };
 
-const auth = getAuth();
 const signOutFunc = () => {
-  signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-      router.push("/");
-    })
-    .catch((error) => {
-      // An error happened.
-    });
+  localStorage.removeItem("storedData");
+  // Sign-out successful.
+  router.push("/");
 };
 </script>
 
