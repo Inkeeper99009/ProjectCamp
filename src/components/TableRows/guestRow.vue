@@ -1,7 +1,7 @@
 <template>
   <div
     id="container"
-    class="flex w-full items-center gap-8 border-y-sec border-y p-4 hover:bg-sec transition-all cursor-pointer"
+    class="flex w-max items-center gap-8 border-y-sec border-y p-4 hover:bg-sec transition-all cursor-pointer"
   >
     <!-- {{ itemId }} -->
     <div class="flex gap-8 items-center w-full">
