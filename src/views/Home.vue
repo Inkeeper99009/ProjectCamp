@@ -13,7 +13,7 @@
       <parkingTable v-if="selectedTabNumber === 3" />
       <extraCostTable v-if="selectedTabNumber === 4" />
     </div>
-    <div id="adminWindow" class="flex h-full w-full">
+    <div v-if="isAdmin" id="adminWindow" class="flex h-full w-full">
     </div>
   </div>
 </template>
