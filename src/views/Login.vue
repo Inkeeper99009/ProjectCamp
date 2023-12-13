@@ -26,7 +26,32 @@
         :type="'password'"
         v-model="password"
       />
-      <myButton :text="'Login'" @click="login" />
+      <div id="btnsContainer" class="flex w-full h-full">
+        <myButton
+          v-if="isLogin"
+          :text="'Login'"
+          @click="login"
+          class="animate-Smooth_Appear"
+        />
+        <myButton
+          v-if="isLogin"
+          :icon="'fa-solid fa-user-plus'"
+          class="w-max animate-Smooth_Appear"
+          @click="changeMethodeHandler"
+        />
+        <myButton
+          v-if="!isLogin"
+          :text="'Register'"
+          @click="register"
+          class="animate-Smooth_Appear"
+        />
+        <myButton
+          v-if="!isLogin"
+          :icon="'fa-solid fa-arrow-left'"
+          class="w-max animate-Smooth_Appear"
+          @click="changeMethodeHandler"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +60,7 @@
 import myButton from "../components/myButton.vue";
 import myInput from "../components/myInput.vue";
 import { useToast } from "vue-toastification";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { getDatabase, ref as dbRef, onValue, set } from "firebase/database";
 
 import router from "../router";
@@ -45,11 +70,45 @@ const toast = useToast();
 const username = ref("");
 const password = ref("");
 const user = ref();
+const list = ref({});
+const isLogin = ref(true);
 
-const register = () => {};
+const changeMethodeHandler = () => {
+  isLogin.value = !isLogin.value;
+};
+
+const register = () => {
+  const db = getDatabase();
+
+  const dbResult = dbRef(db, "users/" + username.value);
+  console.log(list.value);
+  if (Object.keys(list.value).includes(username.value)) {
+    toast.error("Dieses Konto kann nicht erstellt werden!");
+  } else {
+    onValue(dbResult, (snapshot) => {
+      user.value = snapshot.val();
+      if (user.value === null && username.value != "" && password.value != "") {
+        const reference = dbRef(db, "users/" + username.value);
+        set(reference, {
+          password: password.value,
+          rights: "none",
+        });
+        toast.success("Das Konto wurde erfolgreich erstellt!");
+        localStorage.setItem("storedData", username.value);
+        router.push("/home");
+        return;
+      } else {
+        if (username.value === "" || password.value === "") {
+          toast.info("Alle Felder müssen ausgefüllt werden!");
+        }
+      }
+    });
+  }
+};
+
 const login = () => {
   const db = getDatabase();
-  let dbResult = dbRef(db, "users/" + username.value);
+  const dbResult = dbRef(db, "users/" + username.value);
   onValue(dbResult, (snapshot) => {
     user.value = snapshot.val();
     if (user.value === null) {
@@ -65,11 +124,19 @@ const login = () => {
       }
       if (user.value.password === password.value) {
         localStorage.setItem("storedData", username.value);
-        router.push('/home')
+        router.push("/home");
       }
     }
   });
 };
+
+onMounted(() => {
+  const db = getDatabase();
+  let dbListLocation = dbRef(db, "users/");
+  onValue(dbListLocation, (snapshot) => {
+    list.value = snapshot.val();
+  });
+});
 </script>
 
 <style scoped>

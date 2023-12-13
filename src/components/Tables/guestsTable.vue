@@ -1,5 +1,6 @@
 <template>
-  <div id="container" class="flex flex-col w-full h-full p-4 pt-0">
+  <span v-if="!list" class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear">Hier gibt es keine Feriengäste! Bitte erstellen Sie einen.</span>
+  <div v-if="list" id="container" class="flex flex-col w-full h-full p-4 pt-0">
     <guestRow v-for="item,index in list" :key="item" :object="item" :itemId="index" />
   </div>
   <div

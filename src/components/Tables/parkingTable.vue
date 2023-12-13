@@ -6,7 +6,8 @@ boolean watter
 boolean toilet
 Textarea max.400 chars -->
 <template>
-  <div id="container" class="flex gap-4 flex-wrap w-full h-full p-4 pt-0">
+  <span v-if="!list" class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear">Hier gibt es keinen Stellplatz! Bitte erstellen Sie einen.</span>
+  <div id="container" v-if="list" class="flex gap-4 flex-wrap w-full h-full p-4 pt-0">
     <parkingRow
       v-for="(item, index) in list"
       :key="item"

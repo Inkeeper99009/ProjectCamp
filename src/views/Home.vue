@@ -31,10 +31,12 @@ import router from "../router";
 const isAdmin = ref(false);
 const isSb = ref(false);
 const isGf = ref(false);
+const isGuest = ref(false)
 const resetRights = () => {
   isAdmin.value = false;
   isSb.value = false;
   isGf.value = false;
+  isGuest.value = false;
 };
 const selectedTabNumber = ref(1);
 
@@ -58,6 +60,9 @@ onMounted(() => {
         break;
       case "geschaefts":
         isGf.value = true;
+        break;
+        case "none":
+        isGuest.value = true;
         break;
        }
     }else{
