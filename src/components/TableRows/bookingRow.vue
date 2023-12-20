@@ -2,7 +2,7 @@
   <div
     id="container"
     class="flex gap-4 relative flex-col items-center rounded-lg p-4 w-[15rem] h-max shadow-standart bg-container transition-all"
-    :class="{['hover:bg-sec']:!isLoading}"
+    :class="{ ['hover:bg-sec']: !isLoading }"
   >
     <font-awesome-icon
       @click="deleteBooking"
@@ -32,7 +32,7 @@
       class="flex gap-4 relative flex-col items-center w-full justify-center"
     >
       <div
-      v-if="isLoading"
+        v-if="isLoading"
         role="status"
         class="flex justify-center items-center absolute bg-container/90 w-full h-full"
       >
@@ -53,6 +53,16 @@
           />
         </svg>
         <span class="sr-only">Loading...</span>
+      </div>
+      <div class="flex items-center justify-between w-full">
+        <div id="left" class="flex items-center gap-2">
+          <font-awesome-icon icon="fa-solid fa-moon" />
+          <span>Preis pro Nacht</span>
+        </div>
+        <div id="right" class="flex items-center gap-2">
+          <span>{{ nightCost }}</span
+          ><span>€</span>
+        </div>
       </div>
       <div class="flex items-center justify-between w-full">
         <div id="left" class="flex items-center gap-2">
@@ -169,6 +179,7 @@ const parking = ref({});
 const prices = ref({});
 const isLoading = ref(false);
 
+const nightCost = ref(0);
 const electroCost = ref(0);
 const waterCost = ref(0);
 const toiletCost = ref(0);
@@ -188,6 +199,7 @@ const deleteWindowHandler = () => {
 };
 
 const calculateCosts = () => {
+  nightCost.value = Number(parking.value.priceProNight) ;
   electroCost.value = prices.value.Electro.cost;
   waterCost.value = prices.value.Water.cost;
   toiletCost.value = prices.value.Toilet.cost;
@@ -195,6 +207,7 @@ const calculateCosts = () => {
   childCost.value = prices.value.Child.cost * props.object.childCount;
   petsCost.value = prices.value.Pets.cost * props.object.animalCount;
   endPrice.value =
+    nightCost.value +
     electroCost.value +
     waterCost.value +
     toiletCost.value +
