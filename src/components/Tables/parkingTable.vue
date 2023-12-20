@@ -57,7 +57,7 @@ Textarea max.400 chars -->
         />
         <myInput
           :type="'checkbox'"
-          checkBoxMsg="Brauchen Sie Strom?"
+          checkBoxMsg="Strom vorhanden?"
           v-model="haveElectricity"
         />
         <myInput
