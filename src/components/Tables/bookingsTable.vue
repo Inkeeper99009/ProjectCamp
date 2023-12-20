@@ -78,7 +78,7 @@
             class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear"
             >Hier gibt es keinen Stellplatz! Bitte erstellen Sie einen.</span
           >
-        <div v-if="parkingList">
+        <div v-if="parkingList" class="flex gap-6">
           <parkingRow
             class="bg-sec hover:bg-white/5 cursor-pointer"
             v-for="(item, index) in parkingList"

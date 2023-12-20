@@ -112,7 +112,7 @@
             >Hier gibt es keinen Stellplatz! Ein Mitarbeiter muss eines
             erstellen.</span
           >
-          <div v-if="parkingList">
+          <div v-if="parkingList" class="flex gap-6">
             <parkingRow
               class="bg-sec hover:bg-white/5 cursor-pointer"
               v-for="(item, index) in parkingList"
