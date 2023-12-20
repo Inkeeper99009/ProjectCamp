@@ -21,6 +21,7 @@ Textarea max.400 chars -->
       :key="item"
       :object="item"
       :itemId="index"
+      :showDelete="true"
     />
   </div>
   <div

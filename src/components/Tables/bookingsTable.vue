@@ -85,6 +85,7 @@
             :key="item"
             :object="item"
             :itemId="index"
+            :showDelete="false"
             @click="selectParking(index)"
           />
         </div>

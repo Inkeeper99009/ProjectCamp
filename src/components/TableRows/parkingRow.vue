@@ -4,6 +4,7 @@
     class="flex relative flex-col items-center rounded-lg p-4 w-[15rem] h-[20rem] min-w-[15rem] min-h-[20rem] shadow-standart bg-container hover:bg-sec transition-all"
   >
   <font-awesome-icon
+  v-if="showDelete"
           @click="deleteParkingPlace"
           icon="fa-solid fa-xmark"
           class="text-red-400 hover:text-text w-4 h-4 p-1 rounded-full hover:bg-red-400 absolute top-2 right-2 transition-all cursor-pointer text-base"
@@ -77,6 +78,7 @@ import { ref } from "vue";
 const props = defineProps({
   object: Object,
   itemId: String,
+  showDelete:Boolean
 });
 
 const parkingSize = ref(0);

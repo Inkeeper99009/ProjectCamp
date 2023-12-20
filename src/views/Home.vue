@@ -11,6 +11,7 @@
     />
     <div
       v-if="!isAdmin"
+      :class="{['flex w-full h-full']:!isGuest}"
     >
       <div v-if="!isGuest" id="content" class="flex w-full h-full animate-Smooth_Appear overflow-y-scroll no-scrollbar mb-[4.5rem]">
         <guestsTable v-if="selectedTabNumber === 1" />
