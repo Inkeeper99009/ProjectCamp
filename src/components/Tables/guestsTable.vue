@@ -1,7 +1,20 @@
 <template>
-  <span v-if="!list" class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear">Hier gibt es keine Feriengäste! Bitte erstellen Sie einen.</span>
-  <div v-if="list" id="container" class="flex flex-col w-full h-full p-4 pt-0">
-    <guestRow v-for="item,index in list" :key="item" :object="item" :itemId="index" />
+  <span
+    v-if="!list"
+    class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear"
+    >Hier gibt es keine Feriengäste! Bitte erstellen Sie einen.</span
+  >
+  <div
+    v-if="list"
+    id="container"
+    class="flex flex-col w-full h-full p-4 pt-0 animate-Smooth_Appear"
+  >
+    <guestRow
+      v-for="(item, index) in list"
+      :key="item"
+      :object="item"
+      :itemId="index"
+    />
   </div>
   <div
     id="createWindow"
@@ -15,7 +28,7 @@
       <span
         id="containerTitleAndCloseBtn"
         class="flex justify-between items-center absolute top-7 text-xl left-7 w-[21.5rem] self-start"
-        >Neuen Kunden Anlegen
+        >Neuen Kunden anlegen
         <font-awesome-icon
           @click="createWindowHandler"
           icon="fa-solid fa-xmark"
@@ -25,12 +38,42 @@
         id="createInputs"
         class="flex flex-col mt-10 gap-4 justify-between items-center w-full"
       >
-        <myInput :type="'text'" :placeholder="'Nachname'" inputTitle="Nachname" v-model="Nachname" />
-        <myInput :type="'text'" :placeholder="'Vorname'" inputTitle="Vorname" v-model="Vorname" />
-        <myInput :type="'date'" :placeholder="'Geb. Datum'" inputTitle="Geb. Datum" v-model="BDay" />
-        <myInput :type="'text'" :placeholder="'Tel.'" inputTitle="Tel." v-model="Tel" />
-        <myInput :type="'text'" :placeholder="'E-mail'" inputTitle="E-mail" v-model="Email" />
-        <myInput :type="'text'" :placeholder="'Anschrift'" inputTitle="Anschrift" v-model="Adress" />
+        <myInput
+          :type="'text'"
+          :placeholder="'Nachname'"
+          inputTitle="Nachname"
+          v-model="Nachname"
+        />
+        <myInput
+          :type="'text'"
+          :placeholder="'Vorname'"
+          inputTitle="Vorname"
+          v-model="Vorname"
+        />
+        <myInput
+          :type="'date'"
+          :placeholder="'Geb. Datum'"
+          inputTitle="Geb. Datum"
+          v-model="BDay"
+        />
+        <myInput
+          :type="'text'"
+          :placeholder="'Tel.'"
+          inputTitle="Tel."
+          v-model="Tel"
+        />
+        <myInput
+          :type="'text'"
+          :placeholder="'E-mail'"
+          inputTitle="E-mail"
+          v-model="Email"
+        />
+        <myInput
+          :type="'text'"
+          :placeholder="'Anschrift'"
+          inputTitle="Anschrift"
+          v-model="Adress"
+        />
         <myButton
           :text="'Anlegen'"
           @click="writeGuestData(Nachname, Vorname, BDay, Tel, Email, Adress)"
@@ -47,7 +90,7 @@
     >
       <my-button
         @click="createWindowHandler"
-        :text="'Neuen Kunden Anlegen'"
+        :text="'Neuen Kunden anlegen'"
         class="w-max"
       />
     </div>
@@ -58,8 +101,10 @@
 import guestRow from "../TableRows/guestRow.vue";
 import myButton from "../myButton.vue";
 import myInput from "../myInput.vue";
+import { useToast } from "vue-toastification";
 import { onMounted, ref } from "vue";
 import { getDatabase, ref as dbRef, onValue, set } from "firebase/database";
+
 
 const Nachname = ref("");
 const Vorname = ref("");
@@ -69,8 +114,20 @@ const Email = ref("");
 const Adress = ref("");
 
 const list = ref({});
+const toast = useToast();
 
 const writeGuestData = (Nachname, Vorname, BDay, Tel, Email, Adress) => {
+  if (
+    Nachname === "" ||
+    Vorname === "" ||
+    BDay === "" ||
+    Tel === "" ||
+    Email === "" ||
+    Adress === ""
+  ) {
+    toast.info("Alle Eingaben sollten ausgefüllt sein!");
+    return;
+  }
   const db = getDatabase();
   let idCounter = 0;
   if (list.value != null) {
@@ -87,11 +144,20 @@ const writeGuestData = (Nachname, Vorname, BDay, Tel, Email, Adress) => {
     Email: Email,
     Adress: Adress,
   });
-  createWindowHandler()
+  createWindowHandler();
 };
 
+const resetInputsValue = () => {
+  Nachname.value = "";
+  Vorname.value = "";
+  BDay.value = "";
+  Tel.value = "";
+  Email.value = "";
+  Adress.value = "";
+};
 const isCreateWindowOpen = ref(false);
 const createWindowHandler = () => {
+  resetInputsValue();
   isCreateWindowOpen.value = !isCreateWindowOpen.value;
 };
 onMounted(() => {

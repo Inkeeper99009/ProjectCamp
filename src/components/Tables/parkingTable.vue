@@ -6,8 +6,16 @@ boolean watter
 boolean toilet
 Textarea max.400 chars -->
 <template>
-  <span v-if="!list" class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear">Hier gibt es keinen Stellplatz! Bitte erstellen Sie einen.</span>
-  <div id="container" v-if="list" class="flex gap-4 flex-wrap w-full h-full p-4 pt-0">
+  <span
+    v-if="!list"
+    class="flex justify-center items-center w-full h-screen text-xl animate-Smooth_Appear"
+    >Hier gibt es keinen Stellplatz! Bitte erstellen Sie einen.</span
+  >
+  <div
+    id="container"
+    v-if="list"
+    class="flex gap-4 flex-wrap w-full h-full p-4 pt-0 animate-Smooth_Appear"
+  >
     <parkingRow
       v-for="(item, index) in list"
       :key="item"
@@ -69,7 +77,16 @@ Textarea max.400 chars -->
         />
         <myButton
           :text="'Anlegen'"
-          @click="writeParkingData(parkingSize, priceProNight, haveElectricity, haveWater, haveToilet, commentText)"
+          @click="
+            writeParkingData(
+              parkingSize,
+              priceProNight,
+              haveElectricity,
+              haveWater,
+              haveToilet,
+              commentText
+            )
+          "
         />
       </div>
     </div>
@@ -94,6 +111,7 @@ Textarea max.400 chars -->
 import parkingRow from "../TableRows/parkingRow.vue";
 import myButton from "../myButton.vue";
 import myInput from "../myInput.vue";
+import { useToast } from "vue-toastification";
 import { onMounted, ref } from "vue";
 import { getDatabase, ref as dbRef, onValue, set } from "firebase/database";
 
@@ -105,6 +123,7 @@ const haveToilet = ref(false);
 const commentText = ref("");
 
 const list = ref({});
+const toast = useToast();
 
 const writeParkingData = (
   parkingSize,
@@ -114,6 +133,12 @@ const writeParkingData = (
   haveToilet,
   commentText
 ) => {
+  if (parkingSize === 0 || priceProNight === 0) {
+    toast.info(
+      "Stellplatzgröße und Preis pro Nacht dürfen nicht 0 oder leer sein!"
+    );
+    return;
+  }
   const db = getDatabase();
   let idCounter = 0;
   if (list.value != null) {
@@ -121,7 +146,7 @@ const writeParkingData = (
     console.log(idCounter);
   }
   const placeId = ref(idCounter);
-  const reference = dbRef(db, "parkings/" + "place" + (placeId.value + 1));
+  const reference = dbRef(db, "parkings/" + "platz" + (placeId.value + 1));
   set(reference, {
     parkingSize: parkingSize,
     priceProNight: priceProNight,
@@ -133,8 +158,17 @@ const writeParkingData = (
   createWindowHandler();
 };
 
+const resetInputsValue = () => {
+  parkingSize.value = 0;
+  priceProNight.value = 0;
+  haveElectricity.value = false;
+  haveWater.value = false;
+  haveToilet.value = false;
+  commentText.value = "";
+};
 const isCreateWindowOpen = ref(false);
 const createWindowHandler = () => {
+  resetInputsValue();
   isCreateWindowOpen.value = !isCreateWindowOpen.value;
 };
 onMounted(() => {

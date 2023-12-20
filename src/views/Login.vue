@@ -106,8 +106,8 @@ const register = () => {
   }
 };
 
+const db = getDatabase();
 const login = () => {
-  const db = getDatabase();
   const dbResult = dbRef(db, "users/" + username.value);
   onValue(dbResult, (snapshot) => {
     user.value = snapshot.val();

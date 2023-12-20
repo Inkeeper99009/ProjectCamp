@@ -1,7 +1,11 @@
 <!-- name of extra thing
 price -->
 <template>
-  <div id="page" class="flex flex-wrap p-4 gap-4 w-full h-full">
+  <div
+    id="page"
+    class="flex flex-wrap p-4 gap-4 w-full h-full animate-Smooth_Appear"
+
+  >
     <div
       @click="showElectro = true"
       id="container"
@@ -40,25 +44,7 @@ price -->
         €
       </div>
     </div>
-    <div
-      @click="showAnimal = true"
-      id="container"
-      :class="{ ['hover:bg-sec']: !showAnimal }"
-      class="flex cursor-pointer flex-col items-center rounded-lg p-4 w-[20rem] h-[20rem] justify-center text-3xl gap-4 shadow-standart bg-container transition-all"
-    >
-      <span class="text-xl"> Tiere </span>
-      <font-awesome-icon icon="fa-solid fa-paw" />
-      <div class="flex items-center justify-center w-[10rem]">
-        <myInput
-          :type="'number'"
-          v-model="animalCost"
-          :placeholder="animalCost"
-          v-if="showAnimal"
-        />
-        <div :class="{ ['hidden']: showAnimal }">{{ animalCost }}</div>
-        €
-      </div>
-    </div>
+
     <div
       @click="showToilet = true"
       id="container"
@@ -75,6 +61,25 @@ price -->
           v-if="showToilet"
         />
         <div :class="{ ['hidden']: showToilet }">{{ toiletCost }}</div>
+        €
+      </div>
+    </div>
+    <div
+      @click="showAnimal = true"
+      id="container"
+      :class="{ ['hover:bg-sec']: !showAnimal }"
+      class="flex cursor-pointer flex-col items-center rounded-lg p-4 w-[20rem] h-[20rem] justify-center text-3xl gap-4 shadow-standart bg-container transition-all"
+    >
+      <span class="text-xl"> Tiere </span>
+      <font-awesome-icon icon="fa-solid fa-paw" />
+      <div class="flex items-center justify-center w-[10rem]">
+        <myInput
+          :type="'number'"
+          v-model="animalCost"
+          :placeholder="animalCost"
+          v-if="showAnimal"
+        />
+        <div :class="{ ['hidden']: showAnimal }">{{ animalCost }}</div>
         €
       </div>
     </div>
@@ -128,7 +133,7 @@ price -->
       showChild
     "
     :text="'Speichern'"
-    class="absolute animate-Smooth_Appear bottom-8 w-[10rem] right-8"
+    class="absolute animate-Smooth_Appear bottom-8 max-w-[10rem] right-8"
   />
 </template>
 
@@ -143,6 +148,7 @@ import {
   set,
   remove,
 } from "firebase/database";
+
 
 const showElectro = ref(false);
 const showWater = ref(false);

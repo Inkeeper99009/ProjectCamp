@@ -9,12 +9,14 @@
     v-if="list"
     class="flex flex-wrap gap-4 w-full h-full p-4 pt-0 animate-Smooth_Appear"
   >
-    <bookingRow
-      v-for="(item, index) in list"
-      :key="item"
-      :object="item"
-      :itemId="index"
-    />
+    <div v-for="(item, index) in list" :key="item">
+      <bookingRow
+        v-if="item.userReference === userReference"
+        :key="item"
+        :object="item"
+        :itemId="index"
+      />
+    </div>
   </div>
   <div
     id="bottomMenu"
@@ -50,21 +52,52 @@
       /></span>
       <div
         id="modalContent"
-        class="flex mt-4 w-full h-full overflow-y-scroll no-scrollbar justify-center"
+        class="flex w-full h-full overflow-y-scroll no-scrollbar justify-center"
       >
-        <div v-if="page === 1" id="page1Guest">
-          <span
-            v-if="!guestList"
-            class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear"
-            >Hier gibt es keine Feriengäste! Bitte erstellen Sie einen.</span
+        <div
+          v-if="page === 1"
+          id="page1Guest"
+          class="flex flex-col w-full h-full"
+        >
+          <div
+            id="createInputs"
+            class="flex flex-col mt-4 gap-4 justify-between items-center w-full"
           >
-          <div v-if="guestList">
-            <guestRowMini
-              v-for="(item, index) in guestList"
-              :key="item"
-              :object="item"
-              :itemId="index"
-              @selectedUser="selectGuest"
+            <myInput
+              :type="'text'"
+              :placeholder="'Nachname'"
+              inputTitle="Nachname"
+              v-model="Nachname"
+            />
+            <myInput
+              :type="'text'"
+              :placeholder="'Vorname'"
+              inputTitle="Vorname"
+              v-model="Vorname"
+            />
+            <myInput
+              :type="'date'"
+              :placeholder="'Geb. Datum'"
+              inputTitle="Geb. Datum"
+              v-model="BDay"
+            />
+            <myInput
+              :type="'text'"
+              :placeholder="'Tel.'"
+              inputTitle="Tel."
+              v-model="Tel"
+            />
+            <myInput
+              :type="'text'"
+              :placeholder="'E-mail'"
+              inputTitle="E-mail"
+              v-model="Email"
+            />
+            <myInput
+              :type="'text'"
+              :placeholder="'Anschrift'"
+              inputTitle="Anschrift"
+              v-model="Adress"
             />
           </div>
         </div>
@@ -73,26 +106,27 @@
           id="page2Place"
           class="flex gap-6 p-2 items-center overflow-x-scroll w-full h-full"
         >
-        <span
+          <span
             v-if="!parkingList"
             class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear"
-            >Hier gibt es keinen Stellplatz! Bitte erstellen Sie einen.</span
+            >Hier gibt es keinen Stellplatz! Ein Mitarbeiter muss eines
+            erstellen.</span
           >
-        <div v-if="parkingList">
-          <parkingRow
-            class="bg-sec hover:bg-white/5 cursor-pointer"
-            v-for="(item, index) in parkingList"
-            :key="item"
-            :object="item"
-            :itemId="index"
-            @click="selectParking(index)"
-          />
-        </div>
+          <div v-if="parkingList">
+            <parkingRow
+              class="bg-sec hover:bg-white/5 cursor-pointer"
+              v-for="(item, index) in parkingList"
+              :key="item"
+              :object="item"
+              :itemId="index"
+              @click="selectParking(index)"
+            />
+          </div>
         </div>
         <div
           v-if="page === 3"
           id="page3Another"
-          class="flex flex-col w-full h-full"
+          class="flex flex-col w-full h-full mt-4 gap-4"
         >
           <div
             id="inputContainer"
@@ -192,13 +226,18 @@
           class="rounded-full hover:bg-emerald-400/30 w-4 h-4 p-4 cursor-pointer transition-all animate-Smooth_Appear"
           @click="
             createBooking(
-              selectedGuest,
               selectedParking,
               adultCount,
               childCount,
               animalCount,
               startDate,
-              endDate
+              endDate,
+              Nachname,
+              Vorname,
+              BDay,
+              Tel,
+              Email,
+              Adress
             )
           "
         />
@@ -208,16 +247,27 @@
 </template>
 
 <script setup>
-import bookingRow from "../TableRows/bookingRow.vue";
-import myButton from "../myButton.vue";
-import guestRowMini from "../TableRows/guestRowMINI.vue";
-import parkingRow from "../TableRows/parkingRow.vue";
+import bookingRow from "../components/tablerows/bookingrow.vue";
+import myButton from "../components/myButton.vue";
+import myInput from "./myInput.vue";
+import parkingRow from "../components/tablerows/parkingrow.vue";
 import { useToast } from "vue-toastification";
 import { getDatabase, ref as dbRef, onValue, set } from "firebase/database";
 import { onMounted, ref } from "vue";
 
+const props = defineProps({
+  userReference: String,
+});
+
 const toast = useToast();
 const list = ref({});
+
+const Nachname = ref("");
+const Vorname = ref("");
+const BDay = ref("");
+const Tel = ref("");
+const Email = ref("");
+const Adress = ref("");
 
 const guestList = ref();
 const parkingList = ref();
@@ -238,6 +288,12 @@ const refreshInputs = () => {
   endDate.value = "";
   selectedGuest.value = "";
   selectedParking.value = "";
+  Nachname.value = "";
+  Vorname.value = "";
+  BDay.value = "";
+  Tel.value = "";
+  Email.value = "";
+  Adress.value = "";
 };
 const page = ref(1);
 const changePage = (value) => {
@@ -254,53 +310,75 @@ const createWindowHandler = () => {
   isCreateWindowOpen.value = !isCreateWindowOpen.value;
 };
 
-const selectGuest = (v) => {
-  selectedGuest.value = v;
-  page.value += 1;
-  toast.success("Der Kunde wurde erfolgreich ausgewählt!");
-};
 const selectParking = (v) => {
   selectedParking.value = v;
   page.value += 1;
   toast.success("Der Campingplatz wurde erfolgreich ausgewählt!");
 };
 const createBooking = (
-  selectedGuest,
   selectedParkig,
   adultCount,
   childCount,
   animalCount,
   startDate,
-  endDate
+  endDate,
+  Nachname,
+  Vorname,
+  BDay,
+  Tel,
+  Email,
+  Adress
 ) => {
   if (
-    selectedGuest === "" ||
     selectedParkig === "" ||
     adultCount === 0 ||
     startDate === "" ||
-    endDate === ""
+    endDate === "" ||
+    Nachname === "" ||
+    Vorname === "" ||
+    BDay === "" ||
+    Tel === "" ||
+    Email === "" ||
+    Adress === ""
   ) {
     toast.info(
-      "Diese Reservierung konnte nicht erstellt werden! Stellen Sie sicher, dass alle Eingaben vollständig sind und Sie einen Gast und einen Parkplatz ausgewählt haben."
+      "Diese Reservierung konnte nicht erstellt werden! Stellen Sie sicher, dass alle Eingaben vollständig sind und Sie einen Parkplatz ausgewählt haben."
     );
     return;
   }
   const db = getDatabase();
   let idCounter = 0;
+  let guestCounter = 0;
+  if (guestList.value != null) {
+    guestCounter = Object.keys(guestList.value).length;
+  }
   if (list.value != null) {
     idCounter = Object.keys(list.value).length;
-    console.log(idCounter);
   }
   const bookingId = ref(idCounter);
-  const reference = dbRef(db, "bookings/" + "booking" + (bookingId.value + 1));
-  set(reference, {
-    selectedGuest: selectedGuest,
+  const guestId = ref(guestCounter);
+  const guestReference = dbRef(db, "guest/" + "guest" + (guestId.value + 1));
+  set(guestReference, {
+    LastName: Nachname,
+    FirstName: Vorname,
+    BDay: BDay,
+    Tel: Tel,
+    Email: Email,
+    Adress: Adress,
+  });
+  const bookingReference = dbRef(
+    db,
+    "bookings/" + "booking" + (bookingId.value + 1)
+  );
+  set(bookingReference, {
+    selectedGuest: "guest" + (guestId.value + 1),
     selectedParkig: selectedParkig,
     adultCount: adultCount,
     childCount: childCount,
     animalCount: animalCount,
     startDate: startDate,
     endDate: endDate,
+    userReference: props.userReference,
   });
   createWindowHandler();
 };

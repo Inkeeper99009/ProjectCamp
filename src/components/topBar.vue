@@ -2,7 +2,8 @@
   <div id="container" class="flex w-full p-4 items-center justify-between">
     <div
       id="title"
-      class="hidden lg:flex mr-16 justify-center items-center text-3xl min-w-fit cursor-default"
+      class=" lg:flex mr-16 justify-center items-center text-3xl min-w-fit cursor-default"
+      :class="{['flex']:isAdmin,[' hidden']:!isAdmin,['flex']:isGuest,[' hidden']:!isGuest}"
     >
       <font-awesome-icon
         id="icon"
@@ -13,6 +14,7 @@
     <div v-if="!isAdmin" class="flex justify-center items-center">
       <div id="btnsContainer" class="flex gap-4">
         <topBarButton
+        v-if="!isGuest"
           :iconName="'fa-solid fa-people-roof'"
           :text="'Urlaubsgäste'"
           @click="selectBtn(1)"
@@ -23,6 +25,7 @@
           }"
         />
         <topBarButton
+        v-if="!isGuest"
           :iconName="'fa-solid fa-calendar-days'"
           :text="'Urlaubsbuchungen'"
           @click="selectBtn(2)"
@@ -33,6 +36,7 @@
           }"
         />
         <topBarButton
+        v-if="!isGuest"
           :iconName="'fa-solid fa-caravan'"
           :text="'Stellplätze'"
           @click="selectBtn(3)"
@@ -43,6 +47,7 @@
           }"
         />
         <topBarButton
+        v-if="!isGuest"
           :iconName="'fa-solid fa-hand-holding-dollar'"
           :text="'Zusatzkosten'"
           @click="selectBtn(4)"
@@ -77,6 +82,7 @@ import router from "../router";
 const emits = defineEmits(["selectedTab"]);
 const props = defineProps({
   isAdmin: Boolean,
+  isGuest: Boolean,
 });
 
 const activeBtn = ref(1);

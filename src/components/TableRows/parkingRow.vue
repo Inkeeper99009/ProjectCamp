@@ -1,7 +1,7 @@
 <template>
   <div
     id="container"
-    class="flex relative flex-col items-center rounded-lg p-4 w-[15rem] h-[20rem] shadow-standart bg-container hover:bg-sec transition-all"
+    class="flex relative flex-col items-center rounded-lg p-4 w-[15rem] h-[20rem] min-w-[15rem] min-h-[20rem] shadow-standart bg-container hover:bg-sec transition-all"
   >
   <font-awesome-icon
           @click="deleteParkingPlace"
