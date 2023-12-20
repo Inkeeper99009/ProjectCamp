@@ -11,9 +11,9 @@
     />
     <div
       v-if="!isAdmin"
-      :class="{['flex w-full h-full']:!isGuest}"
+      :class="{['flex w-full h-full overflow-y-scroll no-scrollbar mb-[4.5rem]']:!isGuest}"
     >
-      <div v-if="!isGuest" id="content" class="flex w-full h-full animate-Smooth_Appear overflow-y-scroll no-scrollbar mb-[4.5rem]">
+      <div v-if="!isGuest" id="content" class="flex w-full h-full animate-Smooth_Appear ">
         <guestsTable v-if="selectedTabNumber === 1" />
         <bookingsTable v-if="selectedTabNumber === 2" />
         <parkingTable v-if="selectedTabNumber === 3" />
