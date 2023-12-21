@@ -3,7 +3,7 @@ price -->
 <template>
   <div
     id="page"
-    class="flex flex-wrap p-4 gap-4 w-full h-full animate-Smooth_Appear"
+    class="flex flex-wrap justify-center md:justify-normal p-4 gap-4 w-full h-full animate-Smooth_Appear"
 
   >
     <div

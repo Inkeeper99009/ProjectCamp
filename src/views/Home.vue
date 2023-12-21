@@ -11,19 +11,35 @@
     />
     <div
       v-if="!isAdmin"
-      :class="{['flex w-full h-full overflow-y-scroll no-scrollbar mb-[4.5rem]']:!isGuest}"
+      :class="{
+        ['flex w-full h-full overflow-y-scroll no-scrollbar mb-[4.5rem]']:
+          !isGuest,
+      }"
     >
-      <div v-if="!isGuest" id="content" class="flex w-full h-full animate-Smooth_Appear ">
+      <div
+        v-if="!isGuest"
+        id="content"
+        class="flex w-full h-full animate-Smooth_Appear"
+      >
         <guestsTable v-if="selectedTabNumber === 1" />
         <bookingsTable v-if="selectedTabNumber === 2" />
         <parkingTable v-if="selectedTabNumber === 3" />
         <extraCostTable v-if="selectedTabNumber === 4" />
       </div>
     </div>
-    <div v-if="isAdmin" id="adminWindow" class="flex h-full w-full">
+
+    <div
+      v-if="isAdmin"
+      id="adminWindow"
+      class="flex w-full h-full overflow-y-scroll no-scrollbar mb-[4.5rem]"
+    >
       <windowAdmin />
     </div>
-    <div v-if="isGuest" id="guestWindow" class="flex h-full w-full">
+    <div
+      v-if="isGuest"
+      id="guestWindow"
+      class="flex w-full h-full overflow-y-scroll no-scrollbar mb-[4.5rem]"
+    >
       <windowGuest :userReference="userReference" />
     </div>
   </div>
@@ -45,7 +61,7 @@ const isAdmin = ref(false);
 const isSb = ref(false);
 const isGf = ref(false);
 const isGuest = ref(false);
-const userReference=ref('')
+const userReference = ref("");
 
 const resetRights = () => {
   isAdmin.value = false;
@@ -63,7 +79,7 @@ onMounted(() => {
   resetRights();
   const db = getDatabase();
   let id = localStorage.getItem("storedData");
-  userReference.value = id
+  userReference.value = id;
   let dbResult = dbRef(db, "users/" + id);
   onValue(dbResult, (snapshot) => {
     let currentUser = snapshot.val();

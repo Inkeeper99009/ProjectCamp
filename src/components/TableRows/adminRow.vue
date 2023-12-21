@@ -1,7 +1,7 @@
 <template>
   <div
     id="container"
-    class="flex w-full items-center gap-8 border-y-sec border-y p-4 hover:bg-sec transition-all"
+    class="flex min-w-max items-center gap-8 border-y-sec border-y p-4 hover:bg-sec transition-all"
     @click="$emit('selectedUser', itemId)"
   >
     <!-- {{ itemId }} -->
@@ -42,11 +42,11 @@
   >
     <div
       id="createWindowContent"
-      class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[40rem] bg-container shadow-standart rounded-lg"
+      class="flex relative flex-col justify-center items-center p-4 md:w-[25rem] md:h-[40rem] h-full w-full bg-container shadow-standart md:rounded-lg"
     >
       <span
         id="containerTitleAndCloseBtn"
-        class="flex justify-between items-center absolute top-7 text-xl left-8 w-[21rem] self-start"
+        class="flex justify-between items-center text-xl w-full self-start"
         >Benutzer ändern
         <font-awesome-icon
           @click="modifyWindowHandler"
@@ -55,7 +55,7 @@
       /></span>
       <div
         id="modifyInputs"
-        class="flex flex-col mt-10 gap-4 justify-between items-center w-full h-full"
+        class="flex flex-col md:mt-10 mt-4 gap-4 justify-between items-center w-full h-full"
       >
         <!-- WorkAround dont know why it works like this -->
         <div class="flex flex-col w-full h-full gap-4 mt-10">
@@ -96,7 +96,7 @@
               Passwort nicht ändern!
             </button>
           </div>
-          <span class="w-full flex justify-center items-center">Rechte:</span>
+          <span class="w-full flex justify-center md:mr-0 mt-10  items-center">Rechte:</span>
 
           <div
             id="btnContainer"
@@ -173,7 +173,7 @@
   >
     <div
       id="deleteWindowContent"
-      class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[30rem] bg-container shadow-standart rounded-lg"
+      class="flex relative flex-col justify-center items-center p-4 md:w-[25rem] md:h-[30rem] w-full h-full bg-container shadow-standart md:rounded-lg"
     >
       <font-awesome-icon
         icon="fa-solid fa-triangle-exclamation"

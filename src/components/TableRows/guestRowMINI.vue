@@ -40,20 +40,21 @@
     >
       <div
         id="createWindowContent"
-        class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[35rem] bg-container shadow-standart rounded-lg"
+        class="flex relative flex-col justify-center items-center p-4 md:w-[25rem] md:h-[35rem] h-full w-full bg-container shadow-standart md:rounded-lg"
       >
-        <span
-          id="containerTitleAndCloseBtn"
-          class="flex justify-between items-center absolute top-7 text-xl left-8 w-[21rem] self-start"
-          >Kunden ändern
-          <font-awesome-icon
-            @click="modifyWindowHandler"
-            icon="fa-solid fa-xmark"
-            class="hover:text-red-400 transition-all cursor-pointer text-xl"
-        /></span>
+      <span
+        id="containerTitleAndCloseBtn"
+        class="flex justify-between items-center text-xl w-full self-start"
+        >Kunden ändern
+        <font-awesome-icon
+          @click="modifyWindowHandler"
+          icon="fa-solid fa-xmark"
+          class="hover:text-red-400 transition-all cursor-pointer text-xl"
+      /></span>
+        
         <div
           id="modifyInputs"
-          class="flex flex-col mt-10 gap-4 justify-between items-center w-full"
+          class="flex flex-col mt-10 gap-4 justify-between items-center h-full w-full"
         >
           <!-- WorkAround dont know why it works like this -->
           <div

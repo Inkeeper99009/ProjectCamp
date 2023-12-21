@@ -36,7 +36,7 @@
     <span class="text-xs">{{ inputTitle }}</span>
     <textarea
       @input="$emit('update:modelValue', $event.target.value)"
-      class="outline-none bg-sec rounded-md w-full h-[10rem] resize-none p-3 py-1"
+      class="outline-none bg-sec rounded-md w-full md:h-[10rem] h-[5rem] resize-none p-3 py-1"
     ></textarea>
   </div>
 </template>

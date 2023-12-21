@@ -6,10 +6,10 @@
     <div id="titleContainer" class="flex justify-center items-center gap-4">
       <font-awesome-icon
         id="icon"
-        class="text-9xl"
+        class="md:text-9xl text-[4rem]"
         icon="fa-regular fa-compass"
       />
-      <div id="title" class="text-[8rem]">ComPass</div>
+      <div id="title" class="md:text-[8rem] text-[4rem]">ComPass</div>
     </div>
     <div
       @keypress.enter="login"
@@ -112,7 +112,7 @@ const login = () => {
   onValue(dbResult, (snapshot) => {
     user.value = snapshot.val();
     if (user.value === null) {
-      toast.error("Die eingegebenen Daten sind falsch!");
+      toast.error("Unbekannte kombination von E-mail und Passwort!");
       return;
     } else {
       if (username.value === "" || password.value === "") {
@@ -120,7 +120,7 @@ const login = () => {
         return;
       }
       if (password.value != user.value.password) {
-        toast.error("Die eingegebenen Daten sind falsch!");
+        toast.error("Unbekannte kombination von E-mail und Passwort!");
       }
       if (user.value.password === password.value) {
         localStorage.setItem("storedData", username.value);
@@ -155,7 +155,7 @@ onMounted(() => {
     transform: translateX(0rem) rotate(0grad);
   }
   50% {
-    transform: translateX(35rem) rotate(560grad);
+    transform: translateX(375%) rotate(560grad);
   }
   100% {
     transform: translateX(0rem) rotate(0grad);

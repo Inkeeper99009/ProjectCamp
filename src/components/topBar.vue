@@ -3,7 +3,7 @@
     <div
       id="title"
       class=" lg:flex mr-16 justify-center items-center text-3xl min-w-fit cursor-default"
-      :class="{['flex']:isAdmin,[' hidden']:!isAdmin,['flex']:isGuest,[' hidden']:!isGuest}"
+      :class="{['flex']:isAdmin,[' hidden']:!isAdmin}"
     >
       <font-awesome-icon
         id="icon"

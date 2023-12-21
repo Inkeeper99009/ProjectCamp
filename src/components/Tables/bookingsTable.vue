@@ -7,7 +7,7 @@
   <div
     id="container"
     v-if="list"
-    class="flex flex-wrap gap-4 w-full h-full p-4 pt-0 animate-Smooth_Appear"
+    class="flex flex-wrap justify-center md:justify-normal gap-4 w-full h-full p-4 pt-0 animate-Smooth_Appear"
   >
     <bookingRow
       v-for="(item, index) in list"
@@ -18,10 +18,10 @@
   </div>
   <div
     id="bottomMenu"
-    class="flex self-center justify-center items-center px-16 w-full h-14 absolute bottom-0 z-10 opacity-0 animate-Smooth_Appear"
+    class="flex self-center justify-center items-center md:px-16 w-full h-14 absolute bottom-0 z-10 opacity-0 animate-Smooth_Appear"
   >
     <div
-      class="flex justify-center items-center rounded-t-[30px] w-full h-full bg-container"
+      class="flex justify-center items-center md:rounded-t-[30px] w-full h-full bg-container"
     >
       <my-button
         @click="createWindowHandler"
@@ -37,7 +37,7 @@
   >
     <div
       id="createWindowContent"
-      class="flex flex-col justify-center items-center p-4 w-[43rem] h-[35rem] bg-container shadow-standart rounded-lg"
+      class="flex flex-col justify-center items-center p-4 md:w-[43rem] md:h-[35rem] h-full w-full bg-container shadow-standart rounded-lg"
     >
       <span
         id="containerTitleAndCloseBtn"
@@ -282,7 +282,7 @@ const createBooking = (
     endDate === ""
   ) {
     toast.info(
-      "Diese Reservierung konnte nicht erstellt werden! Stellen Sie sicher, dass alle Eingaben vollständig sind und Sie einen Gast und einen Parkplatz ausgewählt haben."
+      "Diese Reservierung konnte nicht erstellt werden! Stellen Sie sicher, dass alle Eingaben vollständig sind und Sie einen Gast und einen Campingplatz ausgewählt haben."
     );
     return;
   }

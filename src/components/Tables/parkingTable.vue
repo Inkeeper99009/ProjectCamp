@@ -14,7 +14,7 @@ Textarea max.400 chars -->
   <div
     id="container"
     v-if="list"
-    class="flex gap-4 flex-wrap w-full h-full p-4 pt-0 animate-Smooth_Appear"
+    class="flex gap-4 flex-wrap justify-center md:justify-normal w-full h-full p-4 pt-0 animate-Smooth_Appear"
   >
     <parkingRow
       v-for="(item, index) in list"
@@ -31,11 +31,11 @@ Textarea max.400 chars -->
   >
     <div
       id="createWindowContent"
-      class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[40rem] bg-container shadow-standart rounded-lg"
+      class="flex relative flex-col justify-center items-center p-4 w-[25rem] md:h-[40rem] h-full bg-container shadow-standart md:rounded-lg"
     >
       <span
         id="containerTitleAndCloseBtn"
-        class="flex justify-between items-center absolute top-5 text-xl left-6 w-[21.8rem] self-start"
+        class="flex justify-between items-center text-xl w-full self-start"
         >Neuen Stellplatz anlegen
         <font-awesome-icon
           @click="createWindowHandler"
@@ -44,7 +44,7 @@ Textarea max.400 chars -->
       /></span>
       <div
         id="createInputs"
-        class="flex flex-col mt-10 gap-4 justify-between items-center w-full"
+        class="flex flex-col mt-4 gap-4 justify-between items-center w-full h-full"
       >
         <myInput
           :type="'number'"
@@ -94,10 +94,10 @@ Textarea max.400 chars -->
   </div>
   <div
     id="bottomMenu"
-    class="flex self-center justify-center items-center px-16 w-full h-14 absolute bottom-0 z-10 opacity-0 animate-Smooth_Appear"
+    class="flex self-center justify-center items-center md:px-16 w-full h-14 absolute bottom-0 z-10 opacity-0 animate-Smooth_Appear"
   >
     <div
-      class="flex justify-center items-center rounded-t-[30px] w-full h-full bg-container"
+      class="flex justify-center items-center md:rounded-t-[30px] w-full h-full bg-container"
     >
       <my-button
         @click="createWindowHandler"

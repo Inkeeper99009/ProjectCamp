@@ -61,7 +61,7 @@
   >
     <div
       id="deleteWindowContent"
-      class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[30rem] bg-container shadow-standart rounded-lg"
+      class="flex relative flex-col justify-center items-center p-4 md:w-[25rem] md:h-[30rem] w-full h-full bg-container shadow-standart md:rounded-lg"
     >
       <font-awesome-icon
         icon="fa-solid fa-triangle-exclamation"
@@ -103,11 +103,11 @@
   >
     <div
       id="createWindowContent"
-      class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[35rem] bg-container shadow-standart rounded-lg"
+      class="flex relative flex-col justify-center items-center p-4 md:w-[25rem] md:h-[35rem] w-full h-full bg-container shadow-standart md:rounded-lg"
     >
       <span
         id="containerTitleAndCloseBtn"
-        class="flex justify-between items-center absolute top-7 text-xl left-8 w-[21rem] self-start"
+        class="flex justify-between items-center text-xl w-full self-start"
         >Kunden ändern
         <font-awesome-icon
           @click="modifyWindowHandler"
@@ -116,7 +116,7 @@
       /></span>
       <div
         id="modifyInputs"
-        class="flex flex-col mt-10 gap-4 justify-between items-center w-full"
+        class="flex flex-col mt-10 gap-4 justify-between items-center h-full w-full"
       >
         <!-- WorkAround dont know why it works like this -->
         <div

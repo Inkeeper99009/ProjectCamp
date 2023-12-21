@@ -23,11 +23,11 @@
   >
     <div
       id="createWindowContent"
-      class="flex relative flex-col justify-center items-center p-4 w-[25rem] h-[35rem] bg-container shadow-standart rounded-lg"
+      class="flex relative flex-col justify-between items-center p-4 w-[25rem] md:h-[35rem] h-full bg-container shadow-standart md:rounded-lg"
     >
-      <span
+    <span
         id="containerTitleAndCloseBtn"
-        class="flex justify-between items-center absolute top-7 text-xl left-7 w-[21.5rem] self-start"
+        class="flex justify-between items-center text-xl w-full self-start"
         >Neuen Kunden anlegen
         <font-awesome-icon
           @click="createWindowHandler"
@@ -36,7 +36,7 @@
       /></span>
       <div
         id="createInputs"
-        class="flex flex-col mt-10 gap-4 justify-between items-center w-full"
+        class="flex flex-col mt-10 gap-4 justify-between items-center h-full w-full"
       >
         <myInput
           :type="'text'"
@@ -83,10 +83,10 @@
   </div>
   <div
     id="bottomMenu"
-    class="flex self-center justify-center items-center px-16 w-full h-14 absolute bottom-0 z-10 opacity-0 animate-Smooth_Appear"
+    class="flex self-center justify-center items-center md:px-16 w-full h-14 absolute bottom-0 z-10 opacity-0 animate-Smooth_Appear"
   >
     <div
-      class="flex justify-center items-center rounded-t-[30px] w-full h-full bg-container"
+      class="flex justify-center items-center md:rounded-t-[30px] w-full h-full bg-container"
     >
       <my-button
         @click="createWindowHandler"
