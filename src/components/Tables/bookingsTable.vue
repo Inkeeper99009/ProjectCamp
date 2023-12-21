@@ -73,22 +73,22 @@
           id="page2Place"
           class="flex gap-6 p-2 items-center overflow-x-scroll w-full h-full"
         >
-        <span
+          <span
             v-if="!parkingList"
             class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear"
             >Hier gibt es keinen Stellplatz! Bitte erstellen Sie einen.</span
           >
-        <div v-if="parkingList" class="flex gap-6">
-          <parkingRow
-            class="bg-sec hover:bg-white/5 cursor-pointer"
-            v-for="(item, index) in parkingList"
-            :key="item"
-            :object="item"
-            :itemId="index"
-            :showDelete="false"
-            @click="selectParking(index)"
-          />
-        </div>
+          <div v-if="parkingList" class="flex gap-6">
+            <parkingRow
+              class="bg-sec hover:bg-white/5 cursor-pointer"
+              v-for="(item, index) in parkingList"
+              :key="item"
+              :object="item"
+              :itemId="index"
+              :showDelete="false"
+              @click="selectParking(index)"
+            />
+          </div>
         </div>
         <div
           v-if="page === 3"
@@ -284,6 +284,10 @@ const createBooking = (
     toast.info(
       "Diese Reservierung konnte nicht erstellt werden! Stellen Sie sicher, dass alle Eingaben vollständig sind und Sie einen Gast und einen Parkplatz ausgewählt haben."
     );
+    return;
+  }
+  if (startDate > endDate) {
+    toast.error("Das Enddatum darf nicht vor dem aktuellen Startdatum liegen!");
     return;
   }
   const db = getDatabase();
