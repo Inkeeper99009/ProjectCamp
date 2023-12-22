@@ -186,6 +186,17 @@
               v-model="endDate"
             />
           </div>
+          <div
+            id="inputContainer"
+            class="border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
+          >
+          <myInput
+            :type="'textarea'"
+            inputTitle="Bitte notieren Sie die Namen aller Personen und deren Alter. (Optional)"
+            :placeholder="'Beispiel - Name Vorname : 18'"
+            v-model="commentText"
+          />
+          </div>
         </div>
       </div>
       <div
@@ -237,7 +248,8 @@
               BDay,
               Tel,
               Email,
-              Adress
+              Adress,
+              commentText
             )
           "
         />
@@ -268,6 +280,7 @@ const BDay = ref("");
 const Tel = ref("");
 const Email = ref("");
 const Adress = ref("");
+const commentText = ref("")
 
 const guestList = ref();
 const parkingList = ref();
@@ -294,6 +307,7 @@ const refreshInputs = () => {
   Tel.value = "";
   Email.value = "";
   Adress.value = "";
+  commentText.value=""
 };
 const page = ref(1);
 const changePage = (value) => {
@@ -327,7 +341,7 @@ const createBooking = (
   BDay,
   Tel,
   Email,
-  Adress
+  Adress,commentText
 ) => {
   if (
     selectedParkig === "" ||
@@ -379,6 +393,7 @@ const createBooking = (
     startDate: startDate,
     endDate: endDate,
     userReference: props.userReference,
+    userComment:commentText
   });
   createWindowHandler();
 };

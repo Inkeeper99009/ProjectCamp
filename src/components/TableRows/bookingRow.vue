@@ -141,6 +141,14 @@
         </div>
       </div>
     </div>
+    <div class="flex flex-col w-full mt-4 gap-1">
+        <span class="text-xs">Zusätzlicher Kommentar (Name,Alter)</span>
+        <textarea
+          readonly
+          v-model="object.userComment"
+          class="outline-none bg-text/10 cursor-default rounded-md w-full h-[5rem] resize-none p-3 py-1"
+        ></textarea>
+      </div>
     <div
       id="dateTime"
       class="flex flex-col mt-4 items-center justify-center w-full"

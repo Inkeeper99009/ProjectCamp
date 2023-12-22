@@ -50,7 +50,7 @@
       /></span>
       <div
         id="modalContent"
-        class="flex mt-4 w-full h-full overflow-y-scroll no-scrollbar justify-center"
+        class="flex my-4 w-full h-full overflow-y-scroll no-scrollbar justify-center"
       >
         <div v-if="page === 1" id="page1Guest" class="flex w-full">
           <span
@@ -93,7 +93,7 @@
         <div
           v-if="page === 3"
           id="page3Another"
-          class="flex flex-col w-full h-full"
+          class="flex flex-col gap-4 w-full h-full"
         >
           <div
             id="inputContainer"
@@ -153,6 +153,17 @@
               v-model="endDate"
             />
           </div>
+          <div
+            id="inputContainer"
+            class="border-y-0 w-full border-sec border-x-2 border-x-transparent hover:border-x-2 hover:border-x-sec transition-all"
+          >
+          <myInput
+            :type="'textarea'"
+            inputTitle="Bitte notieren Sie die Namen aller Personen und deren Alter. (Optional)"
+            :placeholder="'Beispiel - Name Vorname : 18'"
+            v-model="commentText"
+          />
+          </div>
         </div>
       </div>
       <div
@@ -199,7 +210,8 @@
               childCount,
               animalCount,
               startDate,
-              endDate
+              endDate,
+              commentText
             )
           "
         />
@@ -211,6 +223,7 @@
 <script setup>
 import bookingRow from "../TableRows/bookingRow.vue";
 import myButton from "../myButton.vue";
+import myInput from "../myInput.vue";
 import guestRowMini from "../TableRows/guestRowMINI.vue";
 import parkingRow from "../TableRows/parkingRow.vue";
 import { useToast } from "vue-toastification";
@@ -229,6 +242,7 @@ const startDate = ref("");
 const endDate = ref("");
 const selectedGuest = ref("");
 const selectedParking = ref("");
+const commentText = ref("")
 
 const refreshInputs = () => {
   page.value = 1;
@@ -239,6 +253,7 @@ const refreshInputs = () => {
   endDate.value = "";
   selectedGuest.value = "";
   selectedParking.value = "";
+  commentText.value = "";
 };
 const page = ref(1);
 const changePage = (value) => {
@@ -272,7 +287,8 @@ const createBooking = (
   childCount,
   animalCount,
   startDate,
-  endDate
+  endDate,
+  commentText
 ) => {
   if (
     selectedGuest === "" ||
@@ -306,6 +322,7 @@ const createBooking = (
     animalCount: animalCount,
     startDate: startDate,
     endDate: endDate,
+    userComment:commentText
   });
   createWindowHandler();
 };
