@@ -1,7 +1,7 @@
 <template>
   <span
     v-if="!list"
-    class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear"
+    class="flex justify-center text-center items-center w-full h-full text-xl animate-Smooth_Appear"
     >Es gibt keine Buchungen! Bitte erstellen Sie eine.</span
   >
   <div
@@ -52,7 +52,7 @@
         id="modalContent"
         class="flex mt-4 w-full h-full overflow-y-scroll no-scrollbar justify-center"
       >
-        <div v-if="page === 1" id="page1Guest">
+        <div v-if="page === 1" id="page1Guest" class="flex w-full">
           <span
             v-if="!guestList"
             class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear"

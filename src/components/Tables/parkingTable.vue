@@ -8,7 +8,7 @@ Textarea max.400 chars -->
 <template>
   <span
     v-if="!list"
-    class="flex justify-center items-center w-full h-full text-xl animate-Smooth_Appear"
+    class="flex justify-center text-center items-center w-full h-full text-xl animate-Smooth_Appear"
     >Hier gibt es keinen Stellplatz! Bitte erstellen Sie einen.</span
   >
   <div
